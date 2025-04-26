@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Eternal Love</title>
+
+  <!-- External Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      color: #4b2e83;
+      text-align: center;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      top: 10vh;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin: 20px auto;
+      width: 80%;
+      line-height: 1.6;
+      animation: fadeIn 3s ease;
+    }
+
+    .love-quote {
+      font-size: 2em;
+      color: #ff4b5c;
+      margin-top: 40px;
+      animation: heartbeat 2s infinite;
+    }
+
+    .her-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ff4b5c;
+      margin-bottom: 20px;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff4b5c, 0 0 20px #ff4b5c, 0 0 30px #ff4b5c;
+      }
+      to {
+        text-shadow: 0 0 20px #ff4b5c, 0 0 30px #ff4b5c, 0 0 40px #ff4b5c;
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Falling Hearts Canvas -->
+<canvas id="canvas"></canvas>
+
+<div class="container">
+  <!-- Replace 'her-image.jpg' with the actual path to her image -->
+  <img src="her-image.jpg" alt="Her Image" class="her-image" />
+
+  <h1 class="animate__animated animate__fadeInDown">My Love, My Universe</h1>
+
+  <div id="typed-text" style="font-size: 1.8em; margin-bottom: 30px;"></div>
+
+  <p>
+    Your face is the moonlight that brightens my darkest nights 🌙,<br>
+    Your eyes burn with the fierce beauty of a thousand fires 🔥,<br>
+    Your smile blossoms like a field of endless flowers 🌸,<br>
+    Your voice flows like the gentle waves of the ocean 🌊,<br>
+    Your soul — oh your soul — it is the rarest, most beautiful constellation ✨.<br><br>
+    In you, my love, I have found my forever. ❤️
+  </p>
+
+  <div class="love-quote">"I Love You, Beyond Time and Space..."</div>
+</div>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="https://www.fiftysounds.com/downloads/the-beginning.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Typed.js Text Animation -->
+<script>
+  var typed = new Typed('#typed-text', {
+    strings: [
+      "Your beauty is my sunrise 🌅...",
+      "Your laughter is my favorite song 🎵...",
+      "Your soul is my forever home 🏡..."
+    ],
+    typeSpeed: 50,
+    backSpeed: 25,
+    loop: true
+  });
+</script>
+
+<!-- Falling Hearts Animation -->
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let hearts = [];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  function Heart() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.size = Math.random() * 20 + 10;
+    this.speed = Math.random() * 1 + 0.5;
+    this.alpha = Math.random() * 0.5 + 0.5;
+  }
+
+  Heart.prototype.draw = function() {
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.bezierCurveTo(this.x + this.size / 2, this.y - this.size / 2, this.x + this.size * 1.5, this.y + this.size / 3, this.x, this.y + this.size);
+    ctx.bezierCurveTo(this.x - this.size * 1.5, this.y + this.size / 3, this.x - this.size / 2, this.y - this.size / 2, this.x, this.y);
+    ctx.fill();
+  };
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    hearts.forEach(function(heart) {
+      heart.y += heart.speed;
+      if (heart.y > height) {
+        heart.y = -heart.size;
+        heart.x = Math.random() * width;
+      }
+      heart.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  for (let i = 0; i < 100; i++) {
+    hearts.push(new Heart());
+  }
+
+  animate();
+</script>
+
+</body>
+</html>
