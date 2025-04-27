@@ -89,7 +89,6 @@
 <canvas id="canvas"></canvas>
 
 <div class="container">
-  <!-- Replace 'her-image.jpg' with the actual path to her image -->
   <img src="her-image.jpg" alt="Her Image" class="her-image" />
 
   <h1 class="animate__animated animate__fadeInDown">My Love, My Universe</h1>
@@ -108,13 +107,14 @@
   <div class="love-quote">"I Love You, Beyond Time and Space..."</div>
 </div>
 
-<!-- Background Music: Bulleya -->
-<audio autoplay loop>
+<!-- Audio element -->
+<audio id="background-music" loop>
   <source src="bulleya.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
-<!-- Typed.js Text Animation -->
+<!-- Scripts -->
+<script src="music.js"></script> <!-- New separate music control file -->
 <script>
   var typed = new Typed('#typed-text', {
     strings: [
@@ -126,10 +126,7 @@
     backSpeed: 25,
     loop: true
   });
-</script>
 
-<!-- Falling Hearts Animation -->
-<script>
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   let width, height;
